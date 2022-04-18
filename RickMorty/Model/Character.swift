@@ -8,10 +8,14 @@
 import Foundation
 
 struct Character: Decodable {
+    var id: Int
     var name: String
     var image: String
     var species: String
     var gender: String
+    var status: String
+    var location: Location
+    var episode: [String]
 }
 
 struct CharacterList: Decodable {

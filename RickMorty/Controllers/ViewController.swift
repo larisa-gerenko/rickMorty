@@ -10,7 +10,9 @@ import UIKit
 class ViewController: UITableViewController {
     
     let reuseIdentifier = "reuseIdentifier"
+    let toDetail = "toDetail"
     var characters: [Character] = []
+    
     
 
     override func viewDidLoad() {
@@ -44,5 +46,21 @@ extension ViewController {
         cell.configure(character: character)
         return cell
     }
-
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        performSegue(withIdentifier: toDetail, sender: characters[indexPath.row].id)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == toDetail {
+            guard let destinationVC = segue.destination as? DetailViewController,
+                  let selectedCharacter = sender as? Int
+            else {return}
+            
+            destinationVC.characterID = selectedCharacter
+        }
+    }
+    
+   
 }

@@ -25,6 +25,19 @@ class NetworkService {
            
         }
     }
+    
+    func getCharacter(id: Int, completion: @escaping (Character) -> ()) {
+        
+        AF.request("https://rickandmortyapi.com/api/character/\(id)").responseDecodable(of: Character.self) { (response) in
+            guard let character = response.value else {
+                print("error")
+                return
+                
+            }
+            completion(character)
+        }
+        
+    }
 }
 
 
